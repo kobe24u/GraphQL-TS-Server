@@ -11,6 +11,7 @@ class Gender {
     this.probability = probability;
   }
 }
+
 export default class GenderAPI extends RESTDataSource {
   override baseURL = "https://api.genderize.io";
 

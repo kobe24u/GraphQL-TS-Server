@@ -1,7 +1,7 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import GenderAPI from "./GenderAPI";
-import SpaceXAPI from "./SpaceXAPI";
+import GenderAPI from "./api/GenderAPI.js";
+import SpaceXAPI from "./api/SpaceXAPI.js";
 
 const typeDefs = `#graphql
   type Rocket {
@@ -10,6 +10,11 @@ const typeDefs = `#graphql
     company: String
     country: String
     description: String
+  }
+
+  type Person {
+    name: String
+    age: Int
   }
 
   type Gender {
@@ -28,10 +33,10 @@ const typeDefs = `#graphql
 // This resolver retrieves books from the "books" array above.
 const resolvers = {
   Query: {
-    // getRockets: async (_, __, { dataSources }) => {
-    //   const response = await dataSources.spaceAPI.getRockets();
-    //   return response.data;
-    // },
+    getRockets: async (_, __, { dataSources }) => {
+      const response = await dataSources.spacexAPI.getRockets();
+      return response;
+    },
     guessGender: async (_, { name }, { dataSources }) => {
       const response = await dataSources.genderAPI.guessGender(name);
       return response;
@@ -42,6 +47,7 @@ const resolvers = {
 interface MyContext {
   dataSources: {
     genderAPI: GenderAPI;
+    spacexAPI: SpaceXAPI;
   };
 }
 
@@ -57,6 +63,7 @@ const { url } = await startStandaloneServer(server, {
     return {
       dataSources: {
         genderAPI: new GenderAPI(),
+        spacexAPI: new SpaceXAPI(),
       },
     };
   },
