@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start:dev": "nodemon",
+    "start:dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node-esm' src/index.ts",
     "compile": "tsc",
     "start": "npm run compile && node ./dist/index.js",
     "format": "prettier --write \"src/**/*.{js,ts, json}\""
@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@apollo/client": "^3.7.3",
+    "@apollo/datasource-rest": "^4.3.2",
     "@apollo/server": "^4.3.0",
     "graphql": "^16.6.0"
   },

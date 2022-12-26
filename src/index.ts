@@ -1,5 +1,6 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
+import GenderAPI from "./GenderAPI";
 import SpaceXAPI from "./SpaceXAPI";
 
 const typeDefs = `#graphql
@@ -11,8 +12,15 @@ const typeDefs = `#graphql
     description: String
   }
 
+  type Gender {
+    gender: String
+    name: String
+    probability: Float
+  }
+
   type Query {
     getRockets: [Rocket]
+    guessGender(name: String): Gender
   }
 `;
 
@@ -20,16 +28,20 @@ const typeDefs = `#graphql
 // This resolver retrieves books from the "books" array above.
 const resolvers = {
   Query: {
-    getRockets: async (_, __, { dataSources }) => {
-      const response = await dataSources.spaceAPI.getRockets();
-      return response.data;
+    // getRockets: async (_, __, { dataSources }) => {
+    //   const response = await dataSources.spaceAPI.getRockets();
+    //   return response.data;
+    // },
+    guessGender: async (_, { name }, { dataSources }) => {
+      const response = await dataSources.genderAPI.guessGender(name);
+      return response;
     },
   },
 };
 
 interface MyContext {
   dataSources: {
-    spaceAPI: SpaceXAPI;
+    genderAPI: GenderAPI;
   };
 }
 
@@ -44,7 +56,7 @@ const { url } = await startStandaloneServer(server, {
   context: async () => {
     return {
       dataSources: {
-        spaceAPI: new SpaceXAPI(),
+        genderAPI: new GenderAPI(),
       },
     };
   },
