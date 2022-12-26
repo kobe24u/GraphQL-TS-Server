@@ -1,5 +1,5 @@
 // import { ApolloClient, InMemoryCache } from "@apollo/client";
-// import GET_ROCKETS from "./GET_ROCKETS";
+import { Rocket } from "../__generated__/resolvers-types";
 
 export default class SpaceXAPI {
   // private client;
@@ -18,11 +18,15 @@ export default class SpaceXAPI {
   //     .then((result) => console.log(result));
   // }
 
-  getRockets(): { name: string; age: number }[] {
+  getRockets(): Rocket[] {
     return [
-      { name: "Alice", age: 25 },
-      { name: "Bob", age: 30 },
-      { name: "Charlie", age: 35 },
+      {
+        active: true,
+        boosters: 1,
+        company: "REA",
+        country: "Australia",
+        description: "Test",
+      },
     ];
   }
 }

@@ -2,49 +2,38 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import GenderAPI from "./api/GenderAPI.js";
 import SpaceXAPI from "./api/SpaceXAPI.js";
+import { readFileSync } from "fs";
+import { Resolvers, Rocket } from "./__generated__/resolvers-types";
 
-const typeDefs = `#graphql
-  type Rocket {
-    active: Boolean
-    boosters: Int
-    company: String
-    country: String
-    description: String
-  }
+const typeDefs = readFileSync("./src/graphql/schema.graphql", {
+  encoding: "utf-8",
+});
 
-  type Person {
-    name: String
-    age: Int
-  }
+// const resolvers = {
+//   Query: {
+//     getRockets: async (_, __, { dataSources }) => {
+//       const response = await dataSources.spacexAPI.getRockets();
+//       return response;
+//     },
+//     guessGender: async (_, { name }, { dataSources }) => {
+//       const response = await dataSources.genderAPI.guessGender(name);
+//       return response;
+//     },
+//   },
+// };
 
-  type Gender {
-    gender: String
-    name: String
-    probability: Float
-  }
-
-  type Query {
-    getRockets: [Rocket]
-    guessGender(name: String): Gender
-  }
-`;
-
-// Resolvers define how to fetch the types defined in your schema.
-// This resolver retrieves books from the "books" array above.
-const resolvers = {
+const resolvers: Resolvers = {
   Query: {
-    getRockets: async (_, __, { dataSources }) => {
-      const response = await dataSources.spacexAPI.getRockets();
-      return response;
+    getRockets: (_, __, contextValue) => {
+      return contextValue.dataSources.spacexAPI.getRockets();
     },
-    guessGender: async (_, { name }, { dataSources }) => {
-      const response = await dataSources.genderAPI.guessGender(name);
-      return response;
+    guessGender: async (_, { name }, contextValue) => {
+      return await contextValue.dataSources.genderAPI.guessGender(name);
     },
   },
 };
 
-interface MyContext {
+export interface MyContext {
   dataSources: {
     genderAPI: GenderAPI;
     spacexAPI: SpaceXAPI;

@@ -1,16 +1,5 @@
 import { RESTDataSource } from "@apollo/datasource-rest";
-
-class Gender {
-  name: string;
-  gender: "male" | "female";
-  probability: number;
-
-  constructor(name: string, gender: "male" | "female", probability: number) {
-    this.name = name;
-    this.gender = gender;
-    this.probability = probability;
-  }
-}
+import { Gender } from "../__generated__/resolvers-types";
 
 export default class GenderAPI extends RESTDataSource {
   override baseURL = "https://api.genderize.io";
