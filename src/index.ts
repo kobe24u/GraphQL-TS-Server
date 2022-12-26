@@ -3,7 +3,7 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import GenderAPI from "./api/GenderAPI.js";
 import SpaceXAPI from "./api/SpaceXAPI.js";
 import { readFileSync } from "fs";
-import { Resolvers, Rocket } from "./__generated__/resolvers-types";
+import { Resolvers } from "./__generated__/resolvers-types";
 
 const typeDefs = readFileSync("./src/graphql/schema.graphql", {
   encoding: "utf-8",
@@ -48,10 +48,11 @@ const server = new ApolloServer<MyContext>({
 });
 
 const { url } = await startStandaloneServer(server, {
-  context: async () => {
+  context: async ({ req }) => {
+    const { cache } = server;
     return {
       dataSources: {
-        genderAPI: new GenderAPI(),
+        genderAPI: new GenderAPI({ cache }),
         spacexAPI: new SpaceXAPI(),
       },
     };
