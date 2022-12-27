@@ -1,32 +1,11 @@
-// import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { Rocket } from "../__generated__/types";
+import { Rocket } from "../../__client_generated__/graphql";
+import { request } from "graphql-request";
+import { GetRocketsDocument } from "../graphql/client-operations";
 
 export default class SpaceXAPI {
-  // private client;
-
-  // constructor() {
-  //   this.client = new ApolloClient({
-  //     uri: "https://api.spacex.land/graphql",
-  //     cache: new InMemoryCache(),
-  //   });
-  // }
-  // async getRockets() {
-  //   return this.client
-  //     .query({
-  //       query: GET_ROCKETS,
-  //     })
-  //     .then((result) => console.log(result));
-  // }
-
-  getRockets(): Rocket[] {
-    return [
-      {
-        active: true,
-        boosters: 1,
-        company: "REA",
-        country: "Australia",
-        description: "Test",
-      },
-    ];
+  async getRockets(): Promise<Rocket[]> {
+    return (
+      await request("https://api.spacex.land/graphql", GetRocketsDocument)
+    ).rockets;
   }
 }

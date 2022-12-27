@@ -1,15 +1,14 @@
 {
   "name": "graphql-server-example",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "a graphql server example using Apollo Server V4 along with Graphql codegen",
   "scripts": {
     "start:dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node --esm' src/index.ts",
     "start": "npx ts-node --esm src/index.ts ",
     "compile": "tsc",
     "format": "prettier --write \"src/**/*.{js,ts,json}\"",
     "codegen-server": "graphql-codegen --config codegen.yml",
-    "codegen-client": "graphql-codegen --config codegen-client.ts"
+    "codegen-client": "graphql-codegen --config codegen-client.ts --watch"
   },
   "keywords": [],
   "author": "",
