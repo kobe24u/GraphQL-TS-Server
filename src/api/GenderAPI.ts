@@ -1,5 +1,5 @@
 import { RESTDataSource } from "@apollo/datasource-rest";
-import { Gender } from "../__generated__/resolvers-types";
+import { Gender } from "../__generated__/types";
 import type { KeyValueCache } from "@apollo/utils.keyvaluecache";
 
 export default class GenderAPI extends RESTDataSource {
@@ -18,6 +18,5 @@ export default class GenderAPI extends RESTDataSource {
         name: name,
       },
     });
-    // return data;
   }
 }

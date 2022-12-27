@@ -1,5 +1,5 @@
 // import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { Rocket } from "../__generated__/resolvers-types";
+import { Rocket } from "../__generated__/types";
 
 export default class SpaceXAPI {
   // private client;
