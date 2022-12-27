@@ -10,8 +10,16 @@
     "codegen-server": "graphql-codegen --config codegen.yml",
     "codegen-client": "graphql-codegen --config codegen-client.ts --watch"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "GraphQL",
+    "Apollo",
+    "Apollo Server",
+    "Apollo Server 4",
+    "Server",
+    "Typescript",
+    "Codegen"
+  ],
+  "author": "Vinnie Liu",
   "license": "ISC",
   "dependencies": {
     "@apollo/datasource-rest": "^4.3.2",
