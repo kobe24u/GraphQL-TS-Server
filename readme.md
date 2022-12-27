@@ -46,4 +46,4 @@ To access the GraphQL Playground, go to `http://localhost:4000/graphql` in your 
 
 ## License
 
-This project is licensed under the [INSERT LICENSE NAME HERE] License - see the [LICENSE](./license.md) file for details.
+This project is licensed under the [MIT] License - see the [LICENSE](./license.md) file for details.
