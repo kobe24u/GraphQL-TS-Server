@@ -3,10 +3,7 @@ node_modules
 __client_generated__
 __server_generated__
 dist/
-gql/
-src/
 .env
 .DS_Store
 coverage/
 .vscode/
-resolvers-types.ts
