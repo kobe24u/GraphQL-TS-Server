@@ -8,7 +8,8 @@
     "compile": "tsc",
     "format": "prettier --write \"src/**/*.{js,ts,json}\"",
     "codegen-server": "graphql-codegen --config codegen.yml",
-    "codegen-client": "graphql-codegen --config codegen-client.ts --watch"
+    "codegen-client": "graphql-codegen --config codegen-client.ts",
+    "prepare": "npm run codegen-server & npm run codegen-client"
   },
   "keywords": [
     "GraphQL",
