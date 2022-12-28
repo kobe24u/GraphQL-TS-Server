@@ -2,11 +2,12 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import GenderAPI from "./api/GenderAPI";
 import SpaceXAPI from "./api/SpaceXAPI";
-import { Resolvers } from "../__server_generated__/resolvers";
+import { Resolvers } from "./__server_generated__/resolvers-types";
 import { readFileSync } from "fs";
-import schemas from "./graphql/server-schema";
 
-export const typeDefs = schemas;
+export const typeDefs = readFileSync("./src/graphql/server-schema.graphql", {
+  encoding: "utf-8",
+});
 
 export const resolvers: Resolvers = {
   Query: {
@@ -19,7 +20,7 @@ export const resolvers: Resolvers = {
   },
 };
 
-interface MyContext {
+export interface MyContext {
   dataSources: {
     genderAPI: GenderAPI;
     spacexAPI: SpaceXAPI;

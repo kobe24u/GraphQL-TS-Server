@@ -1,0 +1,38 @@
+# schema: "./src/graphql/server-schema.graphql"
+# generates:
+#   # Specify where our generated types should live.
+#   ./__server_generated__/types.ts:
+#     plugins:
+#       - "typescript"
+#     config:
+#       useIndexSignature: true
+#       contextType: "../index#MyContext"
+#   ./__server_generated__/resolvers.ts:
+#     plugins:
+#       - "typescript"
+#       - "typescript-resolvers"
+#     config:
+#       useIndexSignature: true
+#       # More on this below!
+#       contextType: "../index#MyContext"
+# ./__server_generated__/operations.ts:
+#   plugins:
+#     - "typescript-operations"
+#   config:
+#     useIndexSignature: true
+#     # More on this below!
+#     contextType: "../index#MyContext"
+
+# This configuration file tells GraphQL Code Generator how
+# to generate types based on our schema.
+schema: "./src/graphql/server-schema.graphql"
+generates:
+  # Specify where our generated types should live.
+  ./src/__server_generated__/resolvers-types.ts:
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+    config:
+      useIndexSignature: true
+      # More on this below!
+      contextType: "../index#MyContext"

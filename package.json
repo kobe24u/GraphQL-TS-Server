@@ -7,7 +7,7 @@
     "start": "npx ts-node --esm src/index.ts ",
     "compile": "tsc",
     "format": "prettier --write \"src/**/*.{js,ts,json}\"",
-    "codegen-server": "graphql-codegen --config codegen.yml",
+    "codegen-server": "graphql-codegen --config codegen-server.yml",
     "codegen-client": "graphql-codegen --config codegen-client.ts",
     "prepare": "npm run codegen-server & npm run codegen-client"
   },
