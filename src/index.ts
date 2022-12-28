@@ -4,10 +4,9 @@ import GenderAPI from "./api/GenderAPI";
 import SpaceXAPI from "./api/SpaceXAPI";
 import { Resolvers } from "../__server_generated__/resolvers";
 import { readFileSync } from "fs";
+import schemas from "./graphql/server-schema";
 
-export const typeDefs = readFileSync("./src/graphql/server-schema.graphql", {
-  encoding: "utf-8",
-});
+export const typeDefs = schemas;
 
 export const resolvers: Resolvers = {
   Query: {
