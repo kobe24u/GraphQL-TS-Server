@@ -2,14 +2,14 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import GenderAPI from "./api/GenderAPI";
 import SpaceXAPI from "./api/SpaceXAPI";
-import { Resolvers } from "../__server_generated__/resolvers";
+import { Resolvers } from "./__server_generated__/resolvers-types";
 import { readFileSync } from "fs";
 
-const typeDefs = readFileSync("./src/graphql/server-schema.graphql", {
+export const typeDefs = readFileSync("./src/graphql/server-schema.graphql", {
   encoding: "utf-8",
 });
 
-const resolvers: Resolvers = {
+export const resolvers: Resolvers = {
   Query: {
     getRockets: (_, __, contextValue) => {
       return contextValue.dataSources.spacexAPI.getRockets();
@@ -27,6 +27,18 @@ export interface MyContext {
   };
 }
 
+export const context = {
+  context: async () => {
+    const { cache } = server;
+    return {
+      dataSources: {
+        genderAPI: new GenderAPI({ cache }),
+        spacexAPI: new SpaceXAPI(),
+      },
+    };
+  },
+};
+
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
 const server = new ApolloServer<MyContext>({
@@ -35,17 +47,7 @@ const server = new ApolloServer<MyContext>({
 });
 
 const startServer = async () => {
-  const { url } = await startStandaloneServer(server, {
-    context: async ({ req }) => {
-      const { cache } = server;
-      return {
-        dataSources: {
-          genderAPI: new GenderAPI({ cache }),
-          spacexAPI: new SpaceXAPI(),
-        },
-      };
-    },
-  });
+  const { url } = await startStandaloneServer(server, context);
   return url;
 };
 

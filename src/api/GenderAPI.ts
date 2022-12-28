@@ -1,5 +1,4 @@
 import { RESTDataSource } from "@apollo/datasource-rest";
-import { Gender } from "../../__server_generated__/types";
 import type { KeyValueCache } from "@apollo/utils.keyvaluecache";
 
 export default class GenderAPI extends RESTDataSource {

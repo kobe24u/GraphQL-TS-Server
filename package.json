@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "a graphql server example using Apollo Server V4 along with Graphql codegen",
   "scripts": {
+    "sls-offline": "nodemon --exec sls offline",
     "start:dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node --esm' src/index.ts",
     "start": "npx ts-node --esm src/index.ts ",
-    "compile": "tsc",
     "format": "prettier --write \"src/**/*.{js,ts,json}\"",
-    "codegen-server": "graphql-codegen --config codegen.yml",
+    "codegen-server": "graphql-codegen --config codegen-server.yml",
     "codegen-client": "graphql-codegen --config codegen-client.ts",
-    "prepare": "npm run codegen-server & npm run codegen-client"
+    "prepare": "npm run codegen-server & npm run codegen-client",
+    "compile": "tsc"
   },
   "keywords": [
     "GraphQL",
@@ -18,13 +19,17 @@
     "Apollo Server 4",
     "Server",
     "Typescript",
-    "Codegen"
+    "Codegen",
+    "AWS",
+    "Lambda",
+    "serverless"
   ],
   "author": "Vinnie Liu",
   "license": "ISC",
   "dependencies": {
     "@apollo/datasource-rest": "^4.3.2",
     "@apollo/server": "^4.3.0",
+    "@as-integrations/aws-lambda": "1.0.1",
     "graphql": "^16.6.0",
     "graphql-request": "^5.1.0"
   },
@@ -38,6 +43,8 @@
     "@types/node": "^18.11.17",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.1",
+    "serverless-offline": "^12.0.3",
+    "serverless-plugin-typescript": "^2.1.4",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
   }
