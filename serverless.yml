@@ -11,6 +11,7 @@ provider:
 functions:
   graphql:
     handler: src/lambda.graphqlHandler
+    memorySize: 128 # set the memory size to 128mb which is the least size for a lambda function
     events:
       - httpApi:
           path: /
