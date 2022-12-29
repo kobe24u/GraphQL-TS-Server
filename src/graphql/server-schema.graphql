@@ -12,7 +12,53 @@ type Gender {
   probability: Float
 }
 
+type SuggestionSource {
+  postcode: String
+  atlasId: String
+  state: String
+  name: String
+  suburb: String
+  url: String
+  street: String
+  streetType: String
+  streetName: String
+  streetNumber: String
+  streetNumberTo: String
+  streetNumberFrom: String
+  shortAddress: String
+  image: String
+  channel: String
+}
+
+type SuggestionDisplay {
+  text: String
+  subtext: String
+}
+
+enum SuggestionType {
+  SUBURB
+  POSTCODE
+  REGION
+  PRECINCT
+  STATE
+  ADDRESS
+  STREET
+  LISTING
+}
+
+type Suggestion {
+  id: String
+  type: SuggestionType
+  source: SuggestionSource
+  display: SuggestionDisplay
+}
+
 type Query {
   getRockets: [Rocket]
   guessGender(name: String): Gender
+  getSuggestions(query: String): [Suggestion]
+}
+
+type Mutation {
+  dummy: String
 }

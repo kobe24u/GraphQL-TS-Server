@@ -1,13 +1,26 @@
 import { startServerAndCreateLambdaHandler } from "@as-integrations/aws-lambda";
 import { ApolloServer } from "@apollo/server";
-import { typeDefs, resolvers, context } from "./index";
+import { GenderAPI, SpaceXAPI } from "./graphql/context";
+import schema from "./graphql/modules";
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+const lambda = new ApolloServer({
+  typeDefs: schema.typeDefs,
+  resolvers: schema.resolvers,
 });
 
+const context = {
+  context: async () => {
+    const { cache } = lambda;
+    return {
+      dataSources: {
+        genderAPI: new GenderAPI({ cache }),
+        spacexAPI: new SpaceXAPI(),
+      },
+    };
+  },
+};
+
 export const graphqlHandler = startServerAndCreateLambdaHandler(
-  server,
+  lambda,
   context
 );

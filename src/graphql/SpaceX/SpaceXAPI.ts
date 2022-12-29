@@ -1,6 +1,6 @@
-import { Rocket } from "../../__client_generated__/graphql";
+import { Rocket } from "../../../__client_generated__/graphql";
 import { request } from "graphql-request";
-import { GetRocketsDocument } from "../graphql/client-operations";
+import { GetRocketsDocument } from "../client-operations";
 
 export default class SpaceXAPI {
   async getRockets(): Promise<Rocket[]> {
