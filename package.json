@@ -30,8 +30,11 @@
     "@apollo/datasource-rest": "^4.3.2",
     "@apollo/server": "^4.3.0",
     "@as-integrations/aws-lambda": "1.0.1",
+    "@nic-jennings/sql-datasource": "^0.0.7",
+    "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
-    "graphql-request": "^5.1.0"
+    "graphql-request": "^5.1.0",
+    "mysql2": "^2.3.3"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.16.1",

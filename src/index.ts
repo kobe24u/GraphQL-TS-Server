@@ -1,7 +1,8 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import { MyContext, GenderAPI, SpaceXAPI } from "./graphql/context";
+import { MyContext, GenderAPI, SpaceXAPI, NBAAPI } from "./graphql/context";
 import schema from "./graphql/modules";
+import dbConfig from "./dbconfig";
 
 const context = {
   context: async () => {
@@ -10,6 +11,7 @@ const context = {
       dataSources: {
         genderAPI: new GenderAPI({ cache }),
         spacexAPI: new SpaceXAPI(),
+        nbaAPI: new NBAAPI({ knexConfig: dbConfig, cache }),
       },
     };
   },
