@@ -2,7 +2,7 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { MyContext, GenderAPI, SpaceXAPI, NBAAPI } from "./graphql/context";
 import schema from "./graphql/modules";
-import dbConfig from "./dbconfig";
+import nbaDataSource from "./graphql/DB/Config/dbconfig";
 
 const context = {
   context: async () => {
@@ -11,7 +11,7 @@ const context = {
       dataSources: {
         genderAPI: new GenderAPI({ cache }),
         spacexAPI: new SpaceXAPI(),
-        nbaAPI: new NBAAPI({ knexConfig: dbConfig, cache }),
+        nbaAPI: new NBAAPI(nbaDataSource),
       },
     };
   },
@@ -29,4 +29,12 @@ const startServer = async () => {
   return url;
 };
 
-startServer().then((url) => console.log(`🚀  Server ready at: ${url}`));
+// Set up our database, instantiate our connection before start the server
+nbaDataSource
+  .initialize()
+  .then(async (dataSource) => {
+    dataSource.synchronize(true);
+
+    startServer().then((url) => console.log(`🚀  Server ready at: ${url}`));
+  })
+  .catch((error) => console.log(`Database initialise error: ${error}`));

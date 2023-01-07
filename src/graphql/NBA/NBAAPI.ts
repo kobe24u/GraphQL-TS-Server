@@ -1,13 +1,34 @@
-import { BatchedSQLDataSource } from "@nic-jennings/sql-datasource";
+import DataLoader from "dataloader";
+import { Player, PlayerPosition } from "../DB/DBEntities/Player";
+import { DataSource } from "typeorm";
 
-export default class NBAAPI extends BatchedSQLDataSource {
-  getPlayers;
+export default class NBAAPI {
+  dataSource: DataSource;
 
-  constructor(config) {
-    super(config);
-    this.getPlayers = this.db.query.select("*").from("player").cache(10);
-    this.getPlayers.then((players) => {
-      console.log(players);
-    });
+  constructor(datasource: DataSource) {
+    this.dataSource = datasource;
+  }
+
+  async getAllPlayers(): Promise<Player[]> {
+    return await this.dataSource.manager.find(Player);
+  }
+
+  async createPlayer(
+    firstName: String,
+    lastName: String,
+    age: number,
+    jerseyNum: number,
+    position: String
+  ): Promise<Player> {
+    const player = new Player();
+    player.firstName = firstName as string;
+    player.lastName = lastName as string;
+    player.age = age as number;
+    player.jerseyNumber = jerseyNum as number;
+    player.position = Object.values(PlayerPosition).find(
+      (value) => value === position
+    );
+
+    return this.dataSource.manager.save(player);
   }
 }

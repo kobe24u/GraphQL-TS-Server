@@ -8,6 +8,8 @@
         "moduleResolution": "node",
         "esModuleInterop": true,
         "types": ["node"],
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
     }
 }

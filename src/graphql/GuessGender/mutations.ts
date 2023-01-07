@@ -1,10 +1,4 @@
-const mutations = {
-  dummyGuess: async (_, { query }, contextValue) => {
-    return "male";
-  },
-};
+const mutations = {};
 
-const mutationDefs = `
-  dummyGuess(query: String): String!
-`;
+const mutationDefs = "";
 export { mutations, mutationDefs };
