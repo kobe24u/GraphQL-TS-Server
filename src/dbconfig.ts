@@ -1,12 +1,16 @@
-const dbConfig = {
+const env = process.env.NODE_ENV || "development";
+
+require("dotenv").config({ path: `.env.${env}` });
+
+const mysqlDBConfig = {
   client: "mysql2",
   connection: {
-    host: "localhost",
+    host: process.env.MYSQL_DB_HOST,
     port: 3306,
-    user: "nbaadmin",
-    password: "1234",
-    database: "nba",
+    user: process.env.MYSQL_DB_USER,
+    password: process.env.MYSQL_DB_PASSWORD,
+    database: process.env.MYSQL_DB_DATABASE,
   },
 };
 
-export default dbConfig;
+export default mysqlDBConfig;

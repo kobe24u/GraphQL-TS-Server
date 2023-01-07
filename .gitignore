@@ -9,3 +9,6 @@ coverage/
 .vscode/
 .build/
 .serverless/
+/.env.staging
+/.env.production
+/.env.development

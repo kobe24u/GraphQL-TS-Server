@@ -6,6 +6,8 @@
     "sls-offline": "nodemon --exec sls offline",
     "start:dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node --esm' src/index.ts",
     "start": "npx ts-node --esm src/index.ts ",
+    "start:prod": "NODE_ENV=production npx ts-node --esm src/index.ts ",
+    "start:staging": "NODE_ENV=staging npx ts-node --esm src/index.ts ",
     "format": "prettier --write \"src/**/*.{js,ts,json}\"",
     "codegen-server": "graphql-codegen --config codegen-server.yml",
     "codegen-client": "graphql-codegen --config codegen-client.ts",
