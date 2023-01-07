@@ -35,4 +35,4 @@ nbaDataSource
   .then(async (dataSource) => {
     startServer().then((url) => console.log(`🚀  Server ready at: ${url}`));
   })
-  .catch((error) => console.log(`Database initialise error: ${error}`));
+  .catch((error) => console.log(error));
