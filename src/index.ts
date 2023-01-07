@@ -33,8 +33,6 @@ const startServer = async () => {
 nbaDataSource
   .initialize()
   .then(async (dataSource) => {
-    dataSource.synchronize(true);
-
     startServer().then((url) => console.log(`🚀  Server ready at: ${url}`));
   })
   .catch((error) => console.log(`Database initialise error: ${error}`));
