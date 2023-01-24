@@ -3,7 +3,7 @@ import { queries, queryDefs } from "./queries";
 import { mutations, mutationDefs } from "./mutations";
 import { resolvers } from "./resolvers";
 
-export const SpaceX = {
+export const Country = {
   schema,
   resolvers,
   queries,

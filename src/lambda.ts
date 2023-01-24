@@ -1,6 +1,6 @@
 import { startServerAndCreateLambdaHandler } from "@as-integrations/aws-lambda";
 import { ApolloServer } from "@apollo/server";
-import { GenderAPI, SpaceXAPI, NBAAPI } from "./graphql/context";
+import { GenderAPI, CountryAPI, NBAAPI } from "./graphql/context";
 import schema from "./graphql/modules";
 import nbaDataSource from "./graphql/DB/Config/dbconfig";
 
@@ -15,7 +15,7 @@ const context = {
     return {
       dataSources: {
         genderAPI: new GenderAPI({ cache }),
-        spacexAPI: new SpaceXAPI(),
+        countryAPI: new CountryAPI(),
         nbaAPI: new NBAAPI(nbaDataSource),
       },
     };

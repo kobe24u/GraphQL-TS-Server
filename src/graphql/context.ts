@@ -1,13 +1,13 @@
 import GenderAPI from "./GuessGender/GenderAPI";
-import SpaceXAPI from "./SpaceX/SpaceXAPI";
+import CountryAPI from "./Country/CountryAPI";
 import NBAAPI from "./NBA/NBAAPI";
 
 interface MyContext {
   dataSources: {
     genderAPI: GenderAPI;
-    spacexAPI: SpaceXAPI;
+    countryAPI: CountryAPI;
     nbaAPI: NBAAPI;
   };
 }
 
-export { MyContext, GenderAPI, SpaceXAPI, NBAAPI };
+export { MyContext, GenderAPI, CountryAPI, NBAAPI };

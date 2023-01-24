@@ -1,64 +1,77 @@
-type Rocket {
-  active: Boolean
-  boosters: Int
-  company: String
-  country: String
-  description: String
+type Query {
+  guessGender(name: String): Gender
+
+  getCountry(countryCode: String): Country
+
+  getAllPlayers: [NBAPlayer]
 }
 
+type Mutation {
+  "the position string value should be one of the five options: ['PG', 'SG', 'SF', 'PF', 'C']"
+  createPlayer(
+    firstName: String!
+    lastName: String!
+    age: Int!
+    jerseyNum: Int
+    position: String
+  ): NBAPlayer!
+}
 type Gender {
   gender: String
   name: String
   probability: Float
 }
-
-type SuggestionSource {
-  postcode: String
-  atlasId: String
-  state: String
+type Language {
+  code: ID!
   name: String
-  suburb: String
-  url: String
-  street: String
-  streetType: String
-  streetName: String
-  streetNumber: String
-  streetNumberTo: String
-  streetNumberFrom: String
-  shortAddress: String
-  image: String
-  channel: String
+  native: String
+  rtl: Boolean!
 }
 
-type SuggestionDisplay {
-  text: String
-  subtext: String
+type Continent {
+  code: ID!
+  countries: [Country!]!
+  name: String!
 }
 
-enum SuggestionType {
-  SUBURB
-  POSTCODE
-  REGION
-  PRECINCT
-  STATE
-  ADDRESS
-  STREET
-  LISTING
+type State {
+  code: String
+  country: Country!
+  name: String!
 }
 
-type Suggestion {
-  id: String
-  type: SuggestionType
-  source: SuggestionSource
-  display: SuggestionDisplay
+type Country {
+  capital: String
+  code: ID!
+  currency: String
+  emoji: String!
+  emojiU: String!
+  languages: [Language!]!
+  name: String!
+  native: String!
+  phone: String!
+  states: [State!]!
+  continent: Continent!
+}
+"Five positions available on Basketball court"
+enum NBAPlayerPosition {
+  "e.g. CP3, Dame, Steph Curry"
+  PointGuard
+  "e.g. KOBE, MJ, WADE"
+  ShootGuard
+  "e.g. LBJ, KD"
+  SmallForward
+  "e.g. Tim Duncan, KG"
+  PowerForward
+  "e.g. SHAQ, YAO"
+  Center
 }
 
-type Query {
-  getRockets: [Rocket]
-  guessGender(name: String): Gender
-  getSuggestions(query: String): [Suggestion]
-}
-
-type Mutation {
-  dummy: String
+type NBAPlayer {
+  id: ID
+  firstName: String
+  lastName: String
+  age: Int
+  position: NBAPlayerPosition
+  jerseyNumber: Int
 }

@@ -1,12 +1,25 @@
 import { graphql } from "../../__client_generated__";
 
-export const GetRocketsDocument = graphql(/* GraphQL */ `
-  query GetRockets {
-    rockets {
-      active
-      boosters
-      company
-      description
+export const GetCountryDocument = graphql(/* GraphQL */ `
+  query GetCountry($code: ID!) {
+    country(code: $code) {
+      code
+      name
+      native
+      capital
+      emoji
+      emojiU
+      currency
+      phone
+      states {
+        name
+      }
+      languages {
+        code
+        name
+        native
+        rtl
+      }
     }
   }
 `);

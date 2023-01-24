@@ -1,8 +1,10 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import { MyContext, GenderAPI, SpaceXAPI, NBAAPI } from "./graphql/context";
+import { MyContext, GenderAPI, CountryAPI, NBAAPI } from "./graphql/context";
 import schema from "./graphql/modules";
 import nbaDataSource from "./graphql/DB/Config/dbconfig";
+import { writeFile } from "fs";
+import { format } from "prettier";
 
 const context = {
   context: async () => {
@@ -10,7 +12,7 @@ const context = {
     return {
       dataSources: {
         genderAPI: new GenderAPI({ cache }),
-        spacexAPI: new SpaceXAPI(),
+        countryAPI: new CountryAPI(),
         nbaAPI: new NBAAPI(nbaDataSource),
       },
     };
@@ -22,6 +24,22 @@ const context = {
 const server = new ApolloServer<MyContext>({
   typeDefs: schema.typeDefs,
   resolvers: schema.resolvers,
+});
+
+// Aggregate schema and store in a graphql file for codegen purpose
+const formattedData = format(
+  schema.typeDefs.map((str) => str.trim()).join(""),
+  {
+    parser: "graphql",
+  }
+);
+
+writeFile("src/graphql/server-schema.graphql", formattedData, (err) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log("Schema saved to server-schema.graphql");
+  }
 });
 
 const startServer = async () => {

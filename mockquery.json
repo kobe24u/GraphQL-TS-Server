@@ -5,5 +5,5 @@
     "content-type": "application/json"
   },
   "requestContext": {},
-  "body": "{\"query\":\"query{getRockets{company}}\",\"variables\":{}}"
+  "body": "{\"query\":\"query($code: String){getCountry(countryCode: $code){name emoji native}}\",\"variables\":{\"code\": \"CN\"}}"
 }

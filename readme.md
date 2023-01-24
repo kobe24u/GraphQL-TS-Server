@@ -46,9 +46,9 @@ Simply run `serverless invoke local -f graphql -p mockquery.json`, if you see so
     "headers": {
         "cache-control": "no-store",
         "content-type": "application/json; charset=utf-8",
-        "content-length": "110"
+        "content-length": "78"
     },
-    "body": "{\"data\":{\"getRockets\":[{\"company\":\"SpaceX\"},{\"company\":\"SpaceX\"},{\"company\":\"SpaceX\"},{\"company\":\"SpaceX\"}]}}\n"
+    "body": "{\"data\":{\"getCountry\":{\"name\":\"China\",\"emoji\":\"🇨🇳\",\"native\":\"中国\"}}}\n"
 }
 ```
 
